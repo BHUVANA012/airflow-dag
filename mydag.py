@@ -2,17 +2,12 @@ import datetime
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 
-def do_nothing():
-    pass
+def print_hello():
+    print("Hello, Airflow!")
 
-my_dag = DAG(
-    dag_id="my_dag_name",
-    start_date=datetime.datetime(2021, 1, 1),
-    schedule_interval="@daily",
-)
+dag = DAG('hello_world', description='Hello World DAG',
+          schedule_interval='0 12 * * *',
+          start_date=datetime.datetime(2022, 8, 24),
+          catchup=False)
 
-no_op_task = PythonOperator(
-    task_id="task",
-    python_callable=do_nothing,
-    dag=my_dag,
-)
+hello_operator = PythonOperator(task_id='hello_task', python_callable=print_hello, dag=dag)
