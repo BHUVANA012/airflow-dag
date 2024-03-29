@@ -13,7 +13,7 @@ def evaluate_model():
 # Define the DAG
 ml_dag = DAG('machine_learning', description='Machine Learning DAG',
               schedule_interval='@daily',
-              start_date=datetime.datetime(2022, 8, 24),
+              start_date=datetime.datetime.today(),  # Set start_date to today's date
               catchup=False)
 
 # Define tasks
